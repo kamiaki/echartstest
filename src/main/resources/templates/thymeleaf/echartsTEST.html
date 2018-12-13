@@ -5,9 +5,17 @@
     <title>ECharts</title>
     <script th:src="@{echarts/echarts.js}" src="../../static/echarts/echarts.js"></script>
     <script th:src="@{JQuery/jquery-3.3.1.min.js}" src="../../static/JQuery/jquery-3.3.1.min.js"></script>
+    <script th:src="@{vue/vue.js}" src="../../static/vue/vue.js"></script>
 </head>
 <body>
 <h1 th:text="${value1}">测试</h1>
+
+<div id="app">
+    <input v-model="value1.v1">
+    <input v-model="value1.v2">
+    <input v-model="value1.v3">
+</div>
+
 <div id="main" style="width: 600px;height:400px;"></div>
     <script type="text/javascript">
         var myChart = echarts.init($("#main").get(0));
@@ -30,6 +38,19 @@
             }]
         };
         myChart.setOption(option);
+    </script>
+
+    <script>
+        var vue = new Vue({
+            el:'#app',
+            data:{
+                value1:{
+                    v1:"数据1-1",
+                    v2:"数据1-2",
+                    v3:"数据1-3",
+                }
+            }
+        });
     </script>
 </body>
 </html>
