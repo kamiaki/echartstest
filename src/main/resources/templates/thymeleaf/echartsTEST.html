@@ -4,66 +4,76 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <script th:src="@{JQuery/jquery-3.3.1.min.js}" src="../../static/JQuery/jquery-3.3.1.min.js"></script>
-    <script th:src="@{echarts/echarts.js}" src="../../static/echarts/echarts.js"></script>
     <script th:src="@{vue/vue.js}" src="../../static/vue/vue.js"></script>
     <script th:src="@{vue/axios.min.js}" src="../../static/vue/axios.min.js"></script>
+    <!--echarts-->
+    <script th:src="@{echarts/echarts.js}" src="../../static/echarts/echarts.js"></script>
+    <script th:src="@{echarts/dark.js}" src="../../static/echarts/dark.js"></script>
+    <script th:src="@{echarts/infographic.js}" src="../../static/echarts/infographic.js"></script>
+    <script th:src="@{echarts/macarons.js}" src="../../static/echarts/macarons.js"></script>
+    <script th:src="@{echarts/roma.js}" src="../../static/echarts/roma.js"></script>
+    <script th:src="@{echarts/shine.js}" src="../../static/echarts/shine.js"></script>
+    <script th:src="@{echarts/vintage.js}" src="../../static/echarts/vintage.js"></script>
 </head>
 <body>
-<h1 th:text="${value1}">测试</h1>
-
+<h1 th:text="${title}">标题</h1>
 <div id="app">
     <input v-model="value1.v1">
     <input v-model="value1.v2">
     <input v-model="value1.v3">
+    <div>{{value1.v1}}</div>
+    <div>{{value1.v2}}</div>
+    <div>{{value1.v3}}</div>
 </div>
-<a href="javascript:void(0)" onclick="load()">ajax</a>
-<div id="main" style="width: 600px;height:400px;"></div>
-    <script type="text/javascript">
-        var myChart = echarts.init($("#main").get(0));
-        var option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-                data:['销量']
-            },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
-        myChart.setOption(option);
-    </script>
 
-    <script>
-        var vue = new Vue({
-            el:'#app',
-            data:{
-                value1:{
-                    v1:"数据1-1",
-                    v2:"数据1-2",
-                    v3:"数据1-3",
-                }
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            value1: {
+                v1: "数据1-1",
+                v2: "数据1-2",
+                v3: "数据1-3",
             }
-        });
-
-
-        function load() {
-            axios.post('/ajaxTest','username=123')
-                .then(function (response) {
-                    console.log(response);
-                    console.info(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
         }
-    </script>
+    });
+</script>
+
+<a href="javascript:void(0)" onclick="sendAjax('/basicLine')">基础折线</a>
+<a href="javascript:void(0)" onclick="updateTheme()">更换主题到黑色</a>
+<script>
+    var myChart;
+    var option;
+
+    //更换主题
+    function updateTheme() {
+        if(myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init($("#div_ECharts").get(0), 'dark');
+        myChart.setOption(option);
+    }
+    //创建图标
+    function createECharts() {
+        if(myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init($("#div_ECharts").get(0), 'macarons');
+        myChart.setOption(option);
+    }
+
+    //发送ajax
+    function sendAjax(url) {
+        axios.post(url, 'url='+url)
+            .then(function (response) {
+                option = response.data;
+                createECharts();
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+    }
+</script>
+<div id="div_ECharts" style="width: 600px;height:400px;">图表</div>
 </body>
 </html>
