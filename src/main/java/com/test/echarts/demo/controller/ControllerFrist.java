@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.test.echarts.demo.service.ServiceFrist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,13 @@ import java.util.Map;
 public class ControllerFrist {
     @Autowired
     ServiceFrist serviceFrist;
+
+    @Transactional  //事务回滚
+    @RequestMapping(value = "/testDB")
+    public String testDB()throws Exception{
+        serviceFrist.testDB();
+        return "thymeleaf/testDB";
+    }
 
     @RequestMapping(value = "/")
     public String first(Model model)throws Exception{
@@ -39,6 +47,11 @@ public class ControllerFrist {
         printWriter.write(json);
         printWriter.flush();
 
+        return;
+    }
+
+    @RequestMapping(value = "/basicColumn")
+    public void basicColumn(@RequestParam(value = "url") String value , HttpServletResponse response)throws Exception{
         return;
     }
 }

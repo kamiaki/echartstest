@@ -17,13 +17,10 @@
 </head>
 <body>
 <h1 th:text="${title}">标题</h1>
+<a href="/testDB" >测试DB</a>
 <div id="app">
     <input v-model="value1.v1">
-    <input v-model="value1.v2">
-    <input v-model="value1.v3">
     <div>{{value1.v1}}</div>
-    <div>{{value1.v2}}</div>
-    <div>{{value1.v3}}</div>
 </div>
 
 <script>
@@ -31,9 +28,7 @@
         el: '#app',
         data: {
             value1: {
-                v1: "数据1-1",
-                v2: "数据1-2",
-                v3: "数据1-3",
+                v1: "数据1-1"
             }
         }
     });
@@ -53,15 +48,6 @@
         myChart = echarts.init($("#div_ECharts").get(0), 'dark');
         myChart.setOption(option);
     }
-    //创建图标
-    function createECharts() {
-        if(myChart != null && myChart != "" && myChart != undefined) {
-            myChart.dispose();
-        }
-        myChart = echarts.init($("#div_ECharts").get(0), 'macarons');
-        myChart.setOption(option);
-    }
-
     //发送ajax
     function sendAjax(url) {
         axios.post(url, 'url='+url)
@@ -73,6 +59,17 @@
                 alert(error);
             });
     }
+
+    //创建图表
+    function createECharts() {
+        if(myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init($("#div_ECharts").get(0), 'macarons');
+        myChart.setOption(option);
+    }
+
+
 </script>
 <div id="div_ECharts" style="width: 600px;height:400px;">图表</div>
 </body>

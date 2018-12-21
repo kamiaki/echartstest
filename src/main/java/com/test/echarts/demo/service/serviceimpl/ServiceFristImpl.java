@@ -12,16 +12,20 @@ import com.github.abel533.echarts.series.Line;
 import com.github.abel533.echarts.series.MarkLine;
 import com.github.abel533.echarts.series.MarkPoint;
 import com.github.abel533.echarts.series.Series;
+import com.test.echarts.demo.dao.TestTable1Mapper;
+import com.test.echarts.demo.po.TestTable1;
 import com.test.echarts.demo.service.ServiceFrist;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ServiceFristImpl implements ServiceFrist {
-    public static void main(String[] args) {
-    }
+    @Autowired
+    TestTable1Mapper testTable1Mapper;
 
     @Override
     public Option basicLine() throws Exception {
@@ -114,5 +118,15 @@ public class ServiceFristImpl implements ServiceFrist {
     @Override
     public Option basicMaps() throws Exception {
         return null;
+    }
+
+
+
+    @Override
+    public void testDB() throws Exception {
+        TestTable1 testTable1 = new TestTable1();
+        testTable1.setName(String.valueOf(Math.random()));
+        testTable1.setText(String.valueOf(Math.random()));
+        testTable1Mapper.insert(testTable1);
     }
 }
