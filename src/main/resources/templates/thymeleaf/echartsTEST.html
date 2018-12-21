@@ -34,7 +34,8 @@
     });
 </script>
 
-<a href="javascript:void(0)" onclick="sendAjax('/basicLine')">基础折线</a>
+<a href="javascript:void(0)" onclick="sendAjax('/ECharts/basicLine')">基础折线</a>
+<a href="javascript:void(0)" onclick="sendAjax('/ECharts/basicColumn')">基础柱状图</a>
 <br>
 <a href="javascript:void(0)" onclick="updateTheme('dark')">主题1</a>
 <a href="javascript:void(0)" onclick="updateTheme('infographic')">主题2</a>
@@ -58,8 +59,12 @@
     function sendAjax(url) {
         axios.post(url, 'url='+url)
             .then(function (response) {
-                option = response.data;
-                createECharts();
+                if(response.data == null || "error" == response.data || "" == response.data){
+                    alert(response.data);
+                }else{
+                    option = response.data;
+                    createECharts();
+                }
             })
             .catch(function (error) {
                 alert(error);

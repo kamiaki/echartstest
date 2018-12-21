@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,23 +36,34 @@ public class ControllerFrist {
         return "thymeleaf/echartsTEST";
     }
 
-    @RequestMapping(value = "/basicLine")
-    public void basicLine(@RequestParam(value = "url") String value , HttpServletResponse response)throws Exception{
+    @RequestMapping(value = "/ECharts/{chart}")
+    public void basicLine(@PathVariable(value = "chart") String chart, @RequestParam(value = "url") String value , HttpServletResponse response)throws Exception{
+        System.out.println(chart);
         System.out.println(value);
+        Option option = null;
+        String json = "";
 
-        Option option = serviceFrist.basicLine();
-        String json = GsonUtil.format(option);
+        switch (chart){
+            case "basicLine":
+                option = serviceFrist.basicLine();
+                break;
+            case "basicColumn":
+                break;
+            default:
+                break;
+        }
+
+        if(option!=null){
+            json = GsonUtil.format(option);
+        }else{
+            json = "error";
+        }
 
         response.setContentType("application/json;charset=utf-8");
         PrintWriter printWriter = response.getWriter();
         printWriter.write(json);
         printWriter.flush();
 
-        return;
-    }
-
-    @RequestMapping(value = "/basicColumn")
-    public void basicColumn(@RequestParam(value = "url") String value , HttpServletResponse response)throws Exception{
         return;
     }
 }
