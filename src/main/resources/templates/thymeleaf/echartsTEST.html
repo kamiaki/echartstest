@@ -35,17 +35,23 @@
 </script>
 
 <a href="javascript:void(0)" onclick="sendAjax('/basicLine')">基础折线</a>
-<a href="javascript:void(0)" onclick="updateTheme()">更换主题到黑色</a>
+<br>
+<a href="javascript:void(0)" onclick="updateTheme('dark')">主题1</a>
+<a href="javascript:void(0)" onclick="updateTheme('infographic')">主题2</a>
+<a href="javascript:void(0)" onclick="updateTheme('macarons')">主题3</a>
+<a href="javascript:void(0)" onclick="updateTheme('roma')">主题4</a>
+<a href="javascript:void(0)" onclick="updateTheme('shine')">主题5</a>
+<a href="javascript:void(0)" onclick="updateTheme('vintage')">主题6</a>
 <script>
     var myChart;
     var option;
 
     //更换主题
-    function updateTheme() {
+    function updateTheme(theme) {
         if(myChart != null && myChart != "" && myChart != undefined) {
             myChart.dispose();
         }
-        myChart = echarts.init($("#div_ECharts").get(0), 'dark');
+        myChart = echarts.init($("#div_ECharts").get(0), theme);
         myChart.setOption(option);
     }
     //发送ajax
@@ -65,7 +71,7 @@
         if(myChart != null && myChart != "" && myChart != undefined) {
             myChart.dispose();
         }
-        myChart = echarts.init($("#div_ECharts").get(0), 'macarons');
+        myChart = echarts.init($("#div_ECharts").get(0));
         myChart.setOption(option);
     }
 
