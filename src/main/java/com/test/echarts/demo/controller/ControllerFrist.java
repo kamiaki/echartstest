@@ -4,7 +4,9 @@ import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.json.GsonUtil;
 import com.google.gson.Gson;
 import com.test.echarts.demo.service.ServiceFrist;
+import com.test.echarts.demo.util.UtilECharts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -22,6 +24,9 @@ import java.util.Map;
 public class ControllerFrist {
     @Autowired
     ServiceFrist serviceFrist;
+    @Autowired
+    @Qualifier(value = "utilController")
+    UtilECharts utilECharts;
 
     @Transactional  //事务回滚
     @RequestMapping(value = "/testDB")
@@ -47,23 +52,18 @@ public class ControllerFrist {
             case "basicLine":
                 option = serviceFrist.basicLine();
                 break;
-            case "basicColumn":
+            case "basicMaps":
+                option = serviceFrist.basicMaps();
                 break;
             default:
                 break;
         }
-
         if(option!=null){
             json = GsonUtil.format(option);
         }else{
             json = "error";
         }
-
-        response.setContentType("application/json;charset=utf-8");
-        PrintWriter printWriter = response.getWriter();
-        printWriter.write(json);
-        printWriter.flush();
-
+        utilECharts.sendJson(response, json);
         return;
     }
 }

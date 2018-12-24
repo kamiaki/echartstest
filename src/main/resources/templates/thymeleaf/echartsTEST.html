@@ -14,6 +14,8 @@
     <script th:src="@{echarts/roma.js}" src="../../static/echarts/roma.js"></script>
     <script th:src="@{echarts/shine.js}" src="../../static/echarts/shine.js"></script>
     <script th:src="@{echarts/vintage.js}" src="../../static/echarts/vintage.js"></script>
+    <script th:src="@{echarts/china.js}" src="../../static/echarts/china.js"></script>  <!--地图-->
+
 </head>
 <body>
 <h1 th:text="${title}">标题</h1>
@@ -35,7 +37,7 @@
 </script>
 
 <a href="javascript:void(0)" onclick="sendAjax('/ECharts/basicLine')">基础折线</a>
-<a href="javascript:void(0)" onclick="sendAjax('/ECharts/basicColumn')">基础柱状图</a>
+<a href="javascript:void(0)" onclick="sendAjax('/ECharts/basicMaps')">基础地图</a>
 <br>
 <a href="javascript:void(0)" onclick="updateTheme('dark')">主题1</a>
 <a href="javascript:void(0)" onclick="updateTheme('infographic')">主题2</a>
@@ -47,14 +49,6 @@
     var myChart;
     var option;
 
-    //更换主题
-    function updateTheme(theme) {
-        if(myChart != null && myChart != "" && myChart != undefined) {
-            myChart.dispose();
-        }
-        myChart = echarts.init($("#div_ECharts").get(0), theme);
-        myChart.setOption(option);
-    }
     //发送ajax
     function sendAjax(url) {
         axios.post(url, 'url='+url)
@@ -67,10 +61,17 @@
                 }
             })
             .catch(function (error) {
-                alert(error);
+                alert("error:" + error);
             });
     }
-
+    //更换主题
+    function updateTheme(theme) {
+        if(myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init($("#div_ECharts").get(0), theme);
+        myChart.setOption(option);
+    }
     //创建图表
     function createECharts() {
         if(myChart != null && myChart != "" && myChart != undefined) {

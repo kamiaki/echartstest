@@ -117,7 +117,146 @@ public class ServiceFristImpl implements ServiceFrist {
 
     @Override
     public Option basicMaps() throws Exception {
-        return null;
+        String StrMap = "{\n" +
+                "        title : {\n" +
+                "            text: 'iphone销量',\n" +
+                "            subtext: '纯属虚构',\n" +
+                "            x:'center'\n" +
+                "        },\n" +
+                "        tooltip : {\n" +
+                "            trigger: 'item'\n" +
+                "        },\n" +
+                "        legend: {\n" +
+                "            orient: 'vertical',\n" +
+                "            x:'left',\n" +
+                "            data:['iphone3','iphone4','iphone5']\n" +
+                "        },\n" +
+                "        dataRange: {\n" +
+                "            min: 0,\n" +
+                "            max: 2500,\n" +
+                "            x: 'left',\n" +
+                "            y: 'bottom',\n" +
+                "            text:['高','低'],           // 文本，默认为数值文本\n" +
+                "            calculable : true\n" +
+                "        },\n" +
+                "        toolbox: {\n" +
+                "            show: true,\n" +
+                "            orient : 'vertical',\n" +
+                "            x: 'right',\n" +
+                "            y: 'center',\n" +
+                "            feature : {\n" +
+                "                mark : {show: true},\n" +
+                "                dataView : {show: true, readOnly: false},\n" +
+                "                restore : {show: true},\n" +
+                "                saveAsImage : {show: true}\n" +
+                "            }\n" +
+                "        },\n" +
+                "        roamController: {\n" +
+                "            show: true,\n" +
+                "            x: 'right',\n" +
+                "            mapTypeControl: {\n" +
+                "                'china': true\n" +
+                "            }\n" +
+                "        },\n" +
+                "        series : [\n" +
+                "            {\n" +
+                "                name: 'iphone3',\n" +
+                "                type: 'map',\n" +
+                "                mapType: 'china',\n" +
+                "                roam: false,\n" +
+                "                itemStyle:{\n" +
+                "                    normal:{label:{show:true}},\n" +
+                "                    emphasis:{label:{show:true}}\n" +
+                "                },\n" +
+                "                data:[\n" +
+                "                    {name: '北京',value: 300},\n" +
+                "                    {name: '天津',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '上海',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '重庆',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '河北',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '河南',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '云南',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '辽宁',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '黑龙江',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '湖南',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '安徽',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '山东',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '新疆',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '江苏',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '浙江',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '江西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '湖北',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '广西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '甘肃',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '山西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '内蒙古',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '陕西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '吉林',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '福建',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '贵州',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '广东',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '青海',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '西藏',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '四川',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '宁夏',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '海南',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '台湾',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '香港',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '澳门',value: Math.round(Math.random()*1000)}\n" +
+                "                ]\n" +
+                "            },\n" +
+                "            {\n" +
+                "                name: 'iphone4',\n" +
+                "                type: 'map',\n" +
+                "                mapType: 'china',\n" +
+                "                itemStyle:{\n" +
+                "                    normal:{label:{show:true}},\n" +
+                "                    emphasis:{label:{show:true}}\n" +
+                "                },\n" +
+                "                data:[\n" +
+                "                    {name: '北京',value: 200},\n" +
+                "                    {name: '天津',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '上海',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '重庆',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '河北',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '安徽',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '新疆',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '浙江',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '江西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '山西',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '内蒙古',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '吉林',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '福建',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '广东',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '西藏',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '四川',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '宁夏',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '香港',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '澳门',value: Math.round(Math.random()*1000)}\n" +
+                "                ]\n" +
+                "            },\n" +
+                "            {\n" +
+                "                name: 'iphone5',\n" +
+                "                type: 'map',\n" +
+                "                mapType: 'china',\n" +
+                "                itemStyle:{\n" +
+                "                    normal:{label:{show:true}},\n" +
+                "                    emphasis:{label:{show:true}}\n" +
+                "                },\n" +
+                "                data:[\n" +
+                "                    {name: '北京',value: 100},\n" +
+                "                    {name: '天津',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '上海',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '广东',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '台湾',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '香港',value: Math.round(Math.random()*1000)},\n" +
+                "                    {name: '澳门',value: Math.round(Math.random()*1000)}\n" +
+                "                ]\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }";
+        Option option = GsonUtil.fromJSON(StrMap);
+        return option;
     }
 
 
